@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myfirstapp.views import UserListCreateView, UserRetrieveUpdateDestroyView
+# from myfirstapp.views import UserListCreateView, UserRetrieveUpdateDestroyView
+from myfirstapp.views_2 import UserRetrieveUpdateDestroyView, UserListCreateView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('users', UserListCreateView.as_view()),
-    path('users/<int:pk>', UserRetrieveUpdateDestroyView.as_view())
+    # path('users', UserListCreateView.as_view()),
+    # path('users/<int:pk>', UserRetrieveUpdateDestroyView.as_view())
+    path('cars', UserListCreateView.as_view()),
+    path('cars/<int:pk>', UserRetrieveUpdateDestroyView.as_view())
 ]

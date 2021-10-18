@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'djangoProject1.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME':'my_django_db',
         'USER': 'root',
         'PASSWORD': 'root',
