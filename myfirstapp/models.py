@@ -1,9 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class CarModel(models.Model):
+class ComputerModel(models.Model):
     class Meta:
-        db_table = 'cars'
+        db_table = 'computers'
     brand = models.CharField(max_length=20)
     model = models.CharField(max_length=20)
-    year = models.IntegerField()
+    RAM_size = models.IntegerField()
+    CPU_frequency = models.IntegerField()
+    monitor = models.IntegerField()
