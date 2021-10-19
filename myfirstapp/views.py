@@ -1,22 +1,20 @@
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+def calkulator(request, a, b, c):
+    print(a,b,c)
+    # if c == '+':
+    #   x = a + b
+    # elif c == '-':
+    #   x = a - b
+    # elif c == '*':
+    #  x = a * b
+    # elif c == '/':
+    #  x = a / b
 
-class MyView(APIView):
-    def get(self, *args, **kwargs):
-        print(self.request.query_params)
-        return Response({'msg': 'Hello from Get'})
+    return render(request, 'calkulator.html',{'a':a,'b':b,'c':c})
 
-    def post(self, *args, **kwargs):
-        data = self.request.data
-        print(data)
-        return Response({'msg': 'Hello from Post'})
-
-    def put(self, *args, **kwargs):
-        return Response({'msg': 'Hello from Put'})
-
-    def patch(self, *args, **kwargs):
-        return Response({'msg': 'Hello from Patch'})
-
-    def delete(self, *args, **kwargs):
-        return Response({'msg': 'Hello from Delete'})
+# def users(request,name):
+#     print(name)
+#     return render(request, 'calkulator.html', {'user':name})

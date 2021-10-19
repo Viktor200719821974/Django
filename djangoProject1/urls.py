@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from myfirstapp.views import MyView
+
+from myfirstapp.views import calkulator
+# from myfirstapp.views import users
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', MyView.as_view())
+    path('<int:a>/<str:c>/<int:b>', calkulator )
+    # path('users/<str:name>', users)
 ]
