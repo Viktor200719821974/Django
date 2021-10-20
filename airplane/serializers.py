@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from models import AirPlaneModel
+from .models import AirPlaneModel
 
 
 class AirPlaneSerializer(ModelSerializer):
