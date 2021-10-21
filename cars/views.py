@@ -1,10 +1,13 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView,GenericAPIView, get_object_or_404
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, get_object_or_404
 from rest_framework import mixins
+from rest_framework.views import APIView
 
 from .models import CarModel
 from .serializer import CarModelSerializer
+
+
 ###############################################################
 
 # # Generic  (ListCreateAPIView,RetrieveUpdateDestroyAPIView)
@@ -12,15 +15,18 @@ from .serializer import CarModelSerializer
 class CarListCreateView(ListCreateAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
-########################################################################
+
+    ########################################################################
     # FILTER
 
     def get_queryset(self):
-        autoParkId = self.request.query_params.get('autoParkId')
-        qs = self.queryset.all()
-        if autoParkId:
-            qs = qs.filter(autoParkId__gte=autoParkId)
+        auto_park_id = self.request.query_params.get('autoParkId')
+        qs = CarModel.objects.all()
+        if auto_park_id:
+            qs.filter(autoPark_id=auto_park_id)
         return qs
+
+
 #########################################################################
 
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -34,11 +40,11 @@ class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
 #     queryset = CarModel.objects.all()
 #     serializer_class = CarModelSerializer
 
-    # def get(self, request, *args, **kwargs):
-    #     return super().list(request, *args, **kwargs)
+# def get(self, request, *args, **kwargs):
+#     return super().list(request, *args, **kwargs)
 
-    # def post(self, request, *args, **kwargs):
-    #     return super().create(request, *args, **kwargs)
+# def post(self, request, *args, **kwargs):
+#     return super().create(request, *args, **kwargs)
 #
 # class CarRetrieveUpdateDestroyView(GenericAPIView,mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
 # mixins.UpdateModelMixin):
@@ -57,22 +63,22 @@ class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
 ###########################################################
 
 # ApiView
-
-    # def get(self, *args, **kwargs):
-    #     cars = CarModel.objects.all()
-    #     serializer = CarModelSerializer(cars, many=True)
-    #     return Response(serializer.data, status.HTTP_200_OK)
-    #
-    # def post(self, *args, **kwargs):
-    #     data = self.request.data
-    #     serializer = CarModelSerializer(data=data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data, status.HTTP_201_CREATED)
-
-
+# class CarListCreateView(APIView):
+#     def get(self, *args, **kwargs):
+#       cars = CarModel.objects.all()
+#       serializer = CarModelSerializer(cars, many=True)
+#       return Response(serializer.data, status.HTTP_200_OK)
+#
+#     def post(self, *args, **kwargs):
+#        data = self.request.data
+#        serializer = CarModelSerializer(data=data)
+#        serializer.is_valid(raise_exception=True)
+#        serializer.save()
+#        return Response(serializer.data, status.HTTP_201_CREATED)
+#
+#
 # class CarRetrieveUpdateDestroyView(GenericAPIView):
-#     queryset = CarModel.objects.all()
+#
 #     def get(self, *args, **kwargs):
 #         car = self.get_object()
 #         serializer = CarModelSerializer(car)
