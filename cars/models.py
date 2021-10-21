@@ -1,6 +1,8 @@
 from django.db import models
 from django.core import validators as V
 
+from auto_park.models import AutoParkModel
+
 # Create your models here.
 class CarModel(models.Model):
     class Meta:
@@ -13,4 +15,4 @@ class CarModel(models.Model):
     color = models.CharField(max_length=20,
                              validators=[V.RegexValidator('^[a-z]{,20}$','Color must be a-z,max-length=20')])
     year = models.IntegerField(validators=[V.MinValueValidator(1990), V.MaxValueValidator(2021)])
-    autoparkId = models.IntegerField(validators=[V.MinValueValidator(1)])
+    autoPark = models.ForeignKey(AutoParkModel, on_delete=models.CASCADE, related_name='cars')

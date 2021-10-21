@@ -15,12 +15,12 @@ class CarListCreateView(ListCreateAPIView):
 ########################################################################
     # FILTER
 
-    # def get_queryset(self):
-    #     year = self.request.query_params.get('year')
-    #     qs = CarModel.objects.all()
-    #     if year:
-    #         qs = qs.filter(year__gte=year)
-    #     return qs
+    def get_queryset(self):
+        autoParkId = self.request.query_params.get('autoParkId')
+        qs = self.queryset.all()
+        if autoParkId:
+            qs = qs.filter(autoParkId__gte=autoParkId)
+        return qs
 #########################################################################
 
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -40,7 +40,8 @@ class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     # def post(self, request, *args, **kwargs):
     #     return super().create(request, *args, **kwargs)
 #
-# class CarRetrieveUpdateDestroyView(GenericAPIView,mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
+# class CarRetrieveUpdateDestroyView(GenericAPIView,mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
+# mixins.UpdateModelMixin):
 #     queryset = CarModel.objects.all()
 #     serializer_class = CarModelSerializer
 

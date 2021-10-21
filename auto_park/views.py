@@ -17,14 +17,14 @@ class AutoParkListCreateView(GenericAPIView):
 # FILTER
 
     # def get_queryset(self):
-    #    year = self.request.query_params.get('year')
-    #    qs = AutoParkModel.objects.all()
-    #    if year:
-    #     qs = qs.filter(year__gte=year)
+    #    year = self.request.query_params.get('name')
+    #    qs = self.queryset.all()
+    #    if name:
+    #     qs = qs.filter(name__gte=name)
     #     return qs
 #####################################################################################
 class AutoParkRetrieveUpdateDestroyView(GenericAPIView):
-    queryzet = AutoParkModel.objects.all()
+    queryset = AutoParkModel.objects.all()
     serializer_class = AutoParkmodelSerializer
 
 
@@ -40,7 +40,8 @@ class AutoParkRetrieveUpdateDestroyView(GenericAPIView):
 # def post(self, request, *args, **kwargs):
 #     return super().create(request, *args, **kwargs)
 #
-# class AutoParkRetrieveUpdateDestroyView(GenericAPIView,mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
+# class AutoParkRetrieveUpdateDestroyView(GenericAPIView,mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
+# mixins.UpdateModelMixin):
 #     queryset = AutoParkModel.objects.all()
 #     serializer_class = AutoParkmodelSerializer
 
