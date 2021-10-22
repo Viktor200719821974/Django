@@ -37,15 +37,12 @@ class AutoParkAddCarView(CreateAPIView):
 # FILTER
 
 # def get_queryset(self):
-#    year = self.request.query_params.get('name')
+#    name = self.request.query_params.get('name')
 #    qs = self.queryset.all()
 #    if name:
 #     qs = qs.filter(name__gte=name)
 #     return qs
 #####################################################################################
-class AutoParkRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = AutoParkModel.objects.all()
-    serializer_class = AutoParkmodelSerializer
 
 # mixins
 

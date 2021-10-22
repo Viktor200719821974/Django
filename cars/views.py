@@ -16,22 +16,23 @@ class CarListCreateView(ListCreateAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
 
+class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = CarModel.objects.all()
+    serializer_class = CarModelSerializer
     ########################################################################
     # FILTER
 
     def get_queryset(self):
-        auto_park_id = self.request.query_params.get('autoParkId')
+        year = self.request.query_params.get('year')
         qs = CarModel.objects.all()
-        if auto_park_id:
-            qs.filter(autoPark_id=auto_park_id)
+        if year:
+            qs.filter(year=year)
         return qs
 
 
 #########################################################################
 
-class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = CarModel.objects.all()
-    serializer_class = CarModelSerializer
+
 ###########################################################
 
 # mixins
