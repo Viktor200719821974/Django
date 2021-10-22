@@ -40,7 +40,7 @@ class AutoParkAddCarView(CreateAPIView):
 #    name = self.request.query_params.get('name')
 #    qs = self.queryset.all()
 #    if name:
-#     qs = qs.filter(name__gte=name)
+#     qs = qs.filter(name=name)
 #     return qs
 #####################################################################################
 

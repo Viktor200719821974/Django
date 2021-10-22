@@ -11,27 +11,23 @@ from .serializer import CarModelSerializer
 ###############################################################
 
 # # Generic  (ListCreateAPIView,RetrieveUpdateDestroyAPIView)
+# Filter
 
 class CarListCreateView(ListCreateAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
 
+
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
-    ########################################################################
-    # FILTER
 
     def get_queryset(self):
-        year = self.request.query_params.get('year')
+        auto_park_id = self.request.query_params.get('autoParkId')
         qs = CarModel.objects.all()
-        if year:
-            qs.filter(year=year)
+        if auto_park_id:
+            qs.filter(autoPark_id=auto_park_id)
         return qs
-
-
-#########################################################################
-
 
 ###########################################################
 
