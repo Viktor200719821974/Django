@@ -11,8 +11,10 @@ mysqlclient = "==2.0.3"
 pytz = "==2021.3"
 sqlparse = "==0.4.2"
 Django = "==3.2.8"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
+isort = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class Django4HomeworkConfig(AppConfig):
+class AutoParkConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'cars'
+    name = 'apps.auto_park'

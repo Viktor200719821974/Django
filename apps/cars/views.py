@@ -1,12 +1,12 @@
-from rest_framework import status
+from rest_framework import mixins, status
+from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView,
+                                     get_object_or_404)
 from rest_framework.response import Response
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, get_object_or_404
-from rest_framework import mixins
 from rest_framework.views import APIView
 
 from .models import CarModel
 from .serializer import CarModelSerializer
-
 
 ###############################################################
 
@@ -15,6 +15,7 @@ from .serializer import CarModelSerializer
 class CarListCreateView(ListCreateAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
+
 
 # Filter
     def get_queryset(self):

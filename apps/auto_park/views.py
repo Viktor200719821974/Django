@@ -1,14 +1,11 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, get_object_or_404, ListCreateAPIView, RetrieveUpdateDestroyAPIView, \
-    CreateAPIView
-from rest_framework import mixins
+from rest_framework.generics import (CreateAPIView, ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView)
+from rest_framework.permissions import AllowAny
+
+from apps.cars.serializer import CarModelSerializer
 
 from .models import AutoParkModel
 from .serializer import AutoParkmodelSerializer
-from cars.serializer import CarModelSerializer
-
 
 #######################################################################################
 
@@ -17,6 +14,7 @@ from cars.serializer import CarModelSerializer
 class AutoParkListCreateView(ListCreateAPIView):
     queryset = AutoParkModel.objects.all()
     serializer_class = AutoParkmodelSerializer
+    # permission_classes = (AllowAny,)
 
 
 class AutoParkRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
