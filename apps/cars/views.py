@@ -4,6 +4,8 @@ from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
                                      get_object_or_404)
 from rest_framework.response import Response
 from rest_framework.views import APIView
+# from rest_framework.permissions import AllowAny
+
 
 from .models import CarModel
 from .serializer import CarModelSerializer
@@ -15,6 +17,7 @@ from .serializer import CarModelSerializer
 class CarListCreateView(ListCreateAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
+    # permission_classes = (AllowAny,)
 
 
 # Filter
