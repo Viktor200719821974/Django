@@ -21,6 +21,9 @@ class UsersListCreateView(ListCreateAPIView):
             return AllowAny(),
         return IsAuthenticated(),
 
+    def get_queryset(self):
+        return UserModel.objects.exclude(id=self.request.user.id)
+
 
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = UserModel.objects.all()
@@ -51,20 +54,32 @@ class UserChangeIsStaff(GenericAPIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-class UserToAdminView(GenericAPIView):
+class UserToSuperAdminView(GenericAPIView):
     permission_classes = (IsSuperUser,)
     queryset = UserModel.objects.all()
 
     def path(self, *args, **kwargs):
         user = self.get_object()
-        user.is_superuser = True
+        UserModel.objects.to_superadmin(user)
+        user.save()
+        data = UserModelSerializer(user).data
+        return Response(data, status.HTTP_200_OK)
+
+    def put(self, *args, **kwargs):
+        user = self.get_object()
+        UserModel.objects.to_user(user)
         user.save()
         data = UserModelSerializer(user).data
         return Response(data, status.HTTP_200_OK)
 
 
-class AvatarView(UpdateAPIView):
-    serializer_class = AvatarSerializer
+class AvatarView(GenericAPIView):
 
-    def get_object(self):
-        return self.request.user.profile
+   def patch(self, *args, **kwargs):
+      avatar_data = self.request.FILES.get('avatar')
+      serializer = AvatarSerializer(data={'url':avatar_data})
+      serializer.is_valid(raise_exception=True)
+      serializer.save(profile=self.request.user.profile)
+      user = UserModelSerializer(self.request.user).data
+      return Response(user, status.HTTP_200_OK)
+
