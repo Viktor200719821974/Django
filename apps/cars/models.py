@@ -8,6 +8,9 @@ from apps.auto_park.models import AutoParkModel
 class CarModel(models.Model):
     class Meta:
         db_table = 'cars'
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машина'
+        ordering = ('id',)
 
     brand = models.CharField(max_length=20,
                              validators=[V.RegexValidator('^[A-Z0-9]{,20}$', 'Brand must be A-Z, 0-9, max-length=20')])

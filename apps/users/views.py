@@ -47,6 +47,8 @@ class UserChangeIsStaff(GenericAPIView):
 
     def patch(self, *args, **kwargs):
         bool = kwargs.get('bool')
+        if bool != 1 or bool != 0:
+            return Response('Value must be 0 and 1', status.HTTP_400_BAD_REQUEST)
         user = self.get_object()
         user.is_staff = bool
         user.save()
@@ -75,11 +77,10 @@ class UserToSuperAdminView(GenericAPIView):
 
 class AvatarView(GenericAPIView):
 
-   def patch(self, *args, **kwargs):
-      avatar_data = self.request.FILES.get('avatar')
-      serializer = AvatarSerializer(data={'url':avatar_data})
-      serializer.is_valid(raise_exception=True)
-      serializer.save(profile=self.request.user.profile)
-      user = UserModelSerializer(self.request.user).data
-      return Response(user, status.HTTP_200_OK)
-
+    def patch(self, *args, **kwargs):
+        avatar_data = self.request.FILES.get('avatar')
+        serializer = AvatarSerializer(data={'url': avatar_data})
+        serializer.is_valid(raise_exception=True)
+        serializer.save(profile=self.request.user.profile)
+        user = UserModelSerializer(self.request.user).data
+        return Response(user, status.HTTP_200_OK)

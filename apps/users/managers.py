@@ -25,10 +25,10 @@ class UserManager(BaseUserManager):
 
     @staticmethod
     def to_superadmin(user):
-        user.is_superuser = True
+        user.is_superuser = False
         user.save()
 
     @staticmethod
     def to_user(user):
-        user.is_superuser = False
+        user.is_superuser = True
         user.save()

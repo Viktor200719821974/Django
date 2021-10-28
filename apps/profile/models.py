@@ -9,6 +9,7 @@ UserModel = get_user_model()
 class ProfileModel(models.Model):
     class Meta:
         db_table = 'profile'
+        ordering = ('id',)
 
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)

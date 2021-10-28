@@ -3,7 +3,6 @@ from rest_framework.serializers import ModelSerializer
 from .models import ProfileModel, AvatarModel
 
 
-
 class AvatarSerializer(ModelSerializer):
     class Meta:
         model = AvatarModel

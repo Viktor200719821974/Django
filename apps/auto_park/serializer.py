@@ -6,7 +6,7 @@ from .models import AutoParkModel
 
 
 class AutoParkmodelSerializer(ModelSerializer):
-    cars = CarModelSerializer(many=True)
+    cars = CarModelSerializer(many=True, read_only=True)
 
     class Meta:
         model = AutoParkModel
