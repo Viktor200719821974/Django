@@ -24,6 +24,9 @@ class UsersListCreateView(ListCreateAPIView):
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
+    def get_serializer_context(self):
+        return {'request':self.request}
+
 
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = UserModel.objects.all()
@@ -47,7 +50,7 @@ class UserChangeIsStaff(GenericAPIView):
 
     def patch(self, *args, **kwargs):
         bool = kwargs.get('bool')
-        if bool != 1 or bool != 0:
+        if bool not in [1,0]:
             return Response('Value must be 0 and 1', status.HTTP_400_BAD_REQUEST)
         user = self.get_object()
         user.is_staff = bool
