@@ -63,9 +63,10 @@ class UserToSuperAdminView(GenericAPIView):
     permission_classes = (IsSuperUser,)
     queryset = UserModel.objects.all()
 
-    def path(self, *args, **kwargs):
+    def patch(self, *args, **kwargs):
         user = self.get_object()
         UserModel.objects.to_superadmin(user)
+        # user.is_superuser = True
         user.save()
         data = UserModelSerializer(user).data
         return Response(data, status.HTTP_200_OK)
@@ -73,6 +74,7 @@ class UserToSuperAdminView(GenericAPIView):
     def put(self, *args, **kwargs):
         user = self.get_object()
         UserModel.objects.to_user(user)
+        # user.is_superuser =False
         user.save()
         data = UserModelSerializer(user).data
         return Response(data, status.HTTP_200_OK)
