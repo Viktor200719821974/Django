@@ -8,6 +8,8 @@ from .models import UserModel as User
 from apps.profile.models import ProfileModel
 from django4.utils.email_utils import EmailUtils
 
+from enums.action_token import ActionTokenEnum
+
 UserModel: User = get_user_model()
 
 
@@ -29,7 +31,7 @@ class UserModelSerializer(ModelSerializer):
         profile = validated_data.pop('profile')
         user = UserModel.objects.create_user(**validated_data)
         ProfileModel.objects.create(**profile, user=user)
-        token = JwtUtils('activate', {'minutes': 30}).create_token(user)
+        token = JwtUtils(ActionTokenEnum.ACTIVATE.token_type, ActionTokenEnum.ACTIVATE.exp_time).create_token(user)
         request = self.context.get('request')
         EmailUtils.register_email(user.email, profile.get('name'), token, request)
         return user

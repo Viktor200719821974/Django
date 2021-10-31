@@ -6,7 +6,7 @@ from .models import CarModel
 class CarFilter(filters.FilterSet):
     year_gt = filters.NumberFilter('year', 'gt')
     year_lt = filters.NumberFilter('year', 'lt')
-    park_name = filters.CharFilter('autopark', 'name__istartswith')
+    park_name = filters.CharFilter('autoPark', 'name__istartswith')
     color_exact = filters.CharFilter('color', '__exact')
     model_regex = filters.CharFilter('model', '__regex')
 
