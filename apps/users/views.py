@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .serializers import UserModelSerializer
 from .permissions import IsSuperUser
 from apps.profile.serializers import AvatarSerializer
+from exeptions.jwt_exeption import BoolException
 
 UserModel: User = get_user_model()
 
@@ -38,6 +39,8 @@ class UserChangeIsActive(GenericAPIView):
 
     def patch(self, *args, **kwargs):
         bool = kwargs.get('bool')
+        if bool not in [1, 0]:
+            raise BoolException
         user = self.get_object()
         user.is_active = bool
         user.save()
@@ -51,7 +54,8 @@ class UserChangeIsStaff(GenericAPIView):
     def patch(self, *args, **kwargs):
         bool = kwargs.get('bool')
         if bool not in [1,0]:
-            return Response('Value must be 0 and 1', status.HTTP_400_BAD_REQUEST)
+            raise BoolException
+        # Response('Value must be 0 and 1', status.HTTP_400_BAD_REQUEST)
         user = self.get_object()
         user.is_staff = bool
         user.save()

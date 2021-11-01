@@ -12,5 +12,5 @@ REST_FRAMEWORK = {
       'django_filters.rest_framework.DjangoFilterBackend'
     ],
     'DEFAULT_PAGINATION_CLASS': 'paginations.page_number_paginator.PageNumberPaginator',
-    'EXEPTION_HANDLER': 'django4.error_handler.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'django4.error_handler.custom_exception_handler'
 }

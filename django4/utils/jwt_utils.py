@@ -5,7 +5,7 @@ from rest_framework_simplejwt.tokens import Token, BlacklistMixin
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from django.contrib.auth import get_user_model
 
-from exeptions.jwt_exeption import JwtExeption
+from exeptions.jwt_exeption import JwtException
 
 UserModel = get_user_model()
 
@@ -28,10 +28,10 @@ class JwtUtils:
         try:
             action_token = self._TokenClass(token)
             if not OutstandingToken.objects.filter(token=token).exists():
-                raise JwtExeption
+                raise JwtException
             action_token.check_blacklist()
             action_token.blacklist()
             user_id = action_token.payload.get('user_id')
             return UserModel.objects.get(pk=user_id)
         except Exception:
-            raise JwtExeption
+            raise JwtException
