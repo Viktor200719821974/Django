@@ -9,6 +9,7 @@ from .serializers import UserModelSerializer
 from .permissions import IsSuperUser
 from apps.profile.serializers import AvatarSerializer
 from exeptions.jwt_exeption import BoolException
+from .filters import UserFilter
 
 UserModel: User = get_user_model()
 
@@ -16,6 +17,7 @@ UserModel: User = get_user_model()
 class UsersListCreateView(ListCreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserModelSerializer
+    filterset_class = UserFilter
 
     def get_permissions(self):
         if self.request.method == 'POST':

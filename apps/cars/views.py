@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, status
 from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
                                      RetrieveUpdateDestroyAPIView,
@@ -5,16 +6,25 @@ from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+from django.utils.decorators import method_decorator
 
 from .models import CarModel
 from .serializer import CarModelSerializer
 from .filters import CarFilter
 
+
 ###############################################################
 
 # # Generic  (ListCreateAPIView,RetrieveUpdateDestroyAPIView)
-
+@method_decorator(name='get', decorator=swagger_auto_schema(operation_id='List of car', operation_summary='Get all'))
 class CarListCreateView(ListCreateAPIView):
+    """
+    get:
+        Get all cars
+    post:
+        Create car
+    """
+
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
     permission_classes = (AllowAny,)
